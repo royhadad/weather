@@ -2,26 +2,23 @@ const express = require('express')
 const Search = require('../models/search')
 const router = new express.Router()
 
+//query params:
+//limit=10
+//skip=0
 router.get('/history', async (req, res) => {
     try {
-        req.query.search
-        if (!req.query.search || typeof req.query.search !== 'string') {
-            return res.status(400).send();
-        }
-        search = lowerCase(search);
-
-        let res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${OPEN_WEATHER_MAP_API_KEY}`);
-        if (res.status !== 200) {
-            throw new Error('not found');
-        }
-        let data = await res.json()
-        data = {
-            place: `${data.name}, ${data.sys.country}`,
-            description: data.weather[0].description
-        };
-        res.status(200).send(data);
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = parseInt(req.query.skip) || 0;
+        const sortObject = { createdAt: -1 };
+        const history = await Search
+            .find()
+            .sort(sortObject)
+            .limit(limit)
+            .skip(skip)
+            .exec();
+        res.status(200).send(history);
     } catch (e) {
-        res.status(404).send();
+        res.status(500).send();
     }
 })
 
