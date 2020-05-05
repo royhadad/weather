@@ -6,9 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "start-mongo": "/home/roy/mongodb/bin/mongod --dbpath=/home/roy/mongodb-data",
-    "kill-process-3000": "sudo kill -9 $(sudo lsof -t -i:3000)"
+    "dev": "nodemon src/index.js"
   },
   "author": "",
   "license": "ISC",

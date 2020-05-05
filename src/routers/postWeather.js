@@ -6,7 +6,7 @@ const router = new express.Router()
 //body:
 //place: string
 //description: string
-router.post('/weather', async (req, res) => {
+router.post('/', async (req, res) => {
     try {
         //check request validity
         if (!req.body.place ||

@@ -8,7 +8,7 @@ const OPEN_WEATHER_MAP_API_KEY = process.env.OPEN_WEATHER_MAP_API_KEY;
 
 //query params:
 //search: string
-router.get('/weather', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         //check request validity
         if (!req.query.search || typeof req.query.search !== 'string') {
